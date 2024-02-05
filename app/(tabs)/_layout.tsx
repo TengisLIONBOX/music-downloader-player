@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function TabLayout() {

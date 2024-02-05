@@ -1,19 +1,25 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const getDownloads = async () => {
+export type DownloadItem = {
+  title: string;
+  uri: string;
+};
+
+export const getDownloads = async (): Promise<DownloadItem[]> => {
   try {
-    const downloads = await AsyncStorage.getItem("downloads");
+    const downloads = await AsyncStorage.getItem("download");
     return downloads ? JSON.parse(downloads) : [];
   } catch (error) {
     console.error("Error getting downloads", error);
+    return [];
   }
 };
 
-export const addDownload = async (item: any) => {
+export const addDownload = async (item: DownloadItem) => {
   try {
     const downloads = await getDownloads();
     downloads.push(item);
-    await AsyncStorage.setItem("downloads", JSON.stringify(downloads));
+    await AsyncStorage.setItem("download", JSON.stringify(downloads));
   } catch (error) {
     console.error("Error getting downloads", error);
   }
